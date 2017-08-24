@@ -480,7 +480,7 @@ export default class SingleDatePicker extends React.Component {
 
           <div style={{ width: '127px', backgroundColor: '#f9f9f9', padding: '15px 0 15px 0' }}>
             <div style={{ height: '90%', margin: '15px 0', overflow: 'scroll' }}>
-              <ul style={{ height: '100%', padding: '0 20px' }}>
+              <ul style={{ margin: '0', height: '100%', padding: '0 20px' }}>
                 {
                   /* eslint-disable */
                   TIMES.map(time => {
