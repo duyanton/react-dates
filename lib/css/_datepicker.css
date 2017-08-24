@@ -121,7 +121,7 @@
 
 .CalendarMonth__caption {
   color: #3c3f40;
-  margin-top: 9px;
+  margin-top: 7px;
   font-size: 16px;
   text-align: center;
   margin-bottom: 2px;
@@ -708,6 +708,7 @@
     cursor: pointer;
     text-decoration: none;
     background-color: #00acd0;
+    font-weight: 500;
     color: #ffffff;
     border-radius: 3px; }
 

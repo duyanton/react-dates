@@ -444,7 +444,7 @@ export default class SingleDatePicker extends React.Component {
           display: 'flex',
           flexDirection: 'row',
           minHeight: '295px',
-          maxHeight: '340px',
+          maxHeight: '350px',
           borderBottom: 'solid 1px #e9e9e9',
         }}
         >
