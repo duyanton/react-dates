@@ -1,7 +1,6 @@
 @import "variables";
 
 .CalendarDay {
-  border: 1px solid lighten($react-dates-color-border-light, 3);
   padding: 0;
   box-sizing: border-box;
   color: $react-dates-color-gray;
@@ -51,7 +50,6 @@
 
 .CalendarDay--hovered {
   background: lighten($react-dates-color-border-light, 3);
-  border: 1px double darken($react-dates-color-border-light, 3);
   color: inherit;
 }
 
@@ -97,7 +95,7 @@
 .CalendarDay--selected-end,
 .CalendarDay--selected {
   background: $react-dates-color-primary;
-  border: 1px double $react-dates-color-primary;
+  border-radius: 100px;
   color: $react-dates-color-white;
 
   &:active {

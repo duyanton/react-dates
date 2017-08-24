@@ -109,6 +109,10 @@ class SingleDatePickerWrapper extends React.Component {
         focused={focused}
         onDateChange={this.onDateChange}
         onFocusChange={this.onFocusChange}
+        onDateTimeChange={(time) => console.log(time)}
+        keepOpenOnDateSelect
+        isOutsideRange={() => {}}
+        hideKeyboardShortcutsPanel
       />
     );
   }

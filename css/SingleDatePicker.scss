@@ -65,3 +65,62 @@
     text-decoration: none;
   }
 }
+
+.TimeListItem {
+  width: 83px;
+  height: 24px;
+  margin-bottom: 14px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.71;
+  text-align: center;
+  color: #323232;
+  list-style: none;
+
+  &--hovered {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #e4e7e7;
+    border-radius: 3px;
+  }
+
+  &--selected {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $react-dates-color-primary;
+    color: #ffffff;
+    border-radius: 3px;
+  }
+}
+
+
+.SingleDatePickerFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 455px;
+  height: 59px;
+  padding: 20px;
+  font-family: Roboto;
+  font-size: 16px;
+  text-align: center;
+  color: #323232;
+}
+
+.SelectOKButton {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  width: 106px;
+  height: 35px;
+  border-radius: 3px;
+  background-color: #fd8b28;
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-align: center;
+  color: #ffffff;
+}

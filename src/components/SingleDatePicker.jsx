@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import cx from 'classnames';
 import Portal from 'react-portal';
@@ -33,6 +34,57 @@ import {
 } from '../../constants';
 
 const propTypes = forbidExtraProps(SingleDatePickerShape);
+
+const TIMES = [
+  '12:00 AM',
+  '12:30 AM',
+  '01:00 AM',
+  '01:30 AM',
+  '02:00 AM',
+  '02:30 AM',
+  '03:00 AM',
+  '03:30 AM',
+  '04:00 AM',
+  '04:30 AM',
+  '05:00 AM',
+  '05:30 AM',
+  '06:00 AM',
+  '06:30 AM',
+  '07:00 AM',
+  '07:30 AM',
+  '08:00 AM',
+  '08:30 AM',
+  '09:00 AM',
+  '09:30 AM',
+  '10:00 AM',
+  '10:30 AM',
+  '11:00 AM',
+  '11:30 AM',
+  '12:00 PM',
+  '12:30 PM',
+  '01:00 PM',
+  '01:30 PM',
+  '02:00 PM',
+  '02:30 PM',
+  '03:00 PM',
+  '03:30 PM',
+  '04:00 PM',
+  '04:30 PM',
+  '05:00 PM',
+  '05:30 PM',
+  '06:00 PM',
+  '06:30 PM',
+  '07:00 PM',
+  '07:30 PM',
+  '08:00 PM',
+  '08:30 PM',
+  '09:00 PM',
+  '09:30 PM',
+  '10:00 PM',
+  '10:30 PM',
+  '11:00 PM',
+  '11:30 PM',
+];
 
 const defaultProps = {
   // required props for a functional interactive SingleDatePicker
@@ -102,7 +154,17 @@ export default class SingleDatePicker extends React.Component {
       dayPickerContainerStyles: {},
       isDayPickerFocused: false,
       isInputFocused: false,
+      isTimeItemHovered: false,
+      date: moment(),
+      time: null,
+      timeItemElementId: null,
     };
+
+    if (props.dateTime) {
+      const time = moment(props.dateTime);
+      this.state.date = time;
+      this.state.time = time.format('hh:mm A');
+    }
 
     this.onDayPickerFocus = this.onDayPickerFocus.bind(this);
     this.onDayPickerBlur = this.onDayPickerBlur.bind(this);
@@ -111,6 +173,10 @@ export default class SingleDatePicker extends React.Component {
     this.onFocus = this.onFocus.bind(this);
     this.onClearFocus = this.onClearFocus.bind(this);
     this.clearDate = this.clearDate.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
+    this.onDateTimeSelect = this.onDateTimeSelect.bind(this);
+    this.onTimeItemMouseEnter = this.onTimeItemMouseEnter.bind(this);
+    this.onTimeItemMouseLeave = this.onTimeItemMouseLeave.bind(this);
 
     this.responsivizePickerPosition = this.responsivizePickerPosition.bind(this);
   }
@@ -207,6 +273,30 @@ export default class SingleDatePicker extends React.Component {
       isInputFocused: true,
       isDayPickerFocused: false,
     });
+  }
+
+  onDateChange(date) {
+    this.setState({ date });
+  }
+
+  onTimeItemMouseEnter(e) {
+    this.setState({
+      isTimeItemHovered: true,
+      timeItemElementId: e.target.getAttribute('id'),
+    });
+  }
+
+  onTimeItemMouseLeave() {
+    this.setState({
+      isTimeItemHovered: false,
+      timeItemElementId: null,
+    });
+  }
+
+  onDateTimeSelect() {
+    if (!this.state.date || !this.state.time) return;
+    const dateTime = moment(`${this.state.date.format('DD/MM/YYYY')} ${this.state.time}`, 'DD/MM/YYYY hh:mm A').valueOf();
+    this.props.onDateTimeChange(dateTime);
   }
 
   getDateString(date) {
@@ -342,38 +432,95 @@ export default class SingleDatePicker extends React.Component {
       <div // eslint-disable-line jsx-a11y/no-static-element-interactions
         ref={(ref) => { this.dayPickerContainer = ref; }}
         className={this.getDayPickerContainerClasses()}
-        style={dayPickerContainerStyles}
+        style={Object.assign(dayPickerContainerStyles, {
+          display: 'flex',
+          flexDirection: 'column',
+          borderRadius: '3px',
+          boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.3)',
+        })}
         onClick={onOutsideClick}
       >
-        <DayPickerSingleDateController
-          date={date}
-          onDateChange={onDateChange}
-          onFocusChange={onFocusChange}
-          orientation={orientation}
-          enableOutsideDays={enableOutsideDays}
-          numberOfMonths={numberOfMonths}
-          monthFormat={monthFormat}
-          withPortal={withPortal || withFullScreenPortal}
-          focused={focused}
-          keepOpenOnDateSelect={keepOpenOnDateSelect}
-          hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
-          initialVisibleMonth={initialVisibleMonth}
-          navPrev={navPrev}
-          navNext={navNext}
-          onPrevMonthClick={onPrevMonthClick}
-          onNextMonthClick={onNextMonthClick}
-          renderMonth={renderMonth}
-          renderDay={renderDay}
-          renderCalendarInfo={renderCalendarInfo}
-          isFocused={isDayPickerFocused}
-          phrases={phrases}
-          daySize={daySize}
-          isRTL={isRTL}
-          isOutsideRange={isOutsideRange}
-          isDayBlocked={isDayBlocked}
-          isDayHighlighted={isDayHighlighted}
-          firstDayOfWeek={firstDayOfWeek}
-        />
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          minHeight: '295px',
+          maxHeight: '340px',
+          borderBottom: 'solid 1px #e9e9e9',
+        }}
+        >
+          <DayPickerSingleDateController
+            date={this.state.date}
+            onDateChange={this.onDateChange}
+            onFocusChange={onFocusChange}
+            orientation={orientation}
+            enableOutsideDays={enableOutsideDays}
+            numberOfMonths={numberOfMonths}
+            monthFormat={monthFormat}
+            withPortal={withPortal || withFullScreenPortal}
+            focused={focused}
+            keepOpenOnDateSelect={keepOpenOnDateSelect}
+            hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
+            initialVisibleMonth={initialVisibleMonth}
+            navPrev={navPrev}
+            navNext={navNext}
+            onPrevMonthClick={onPrevMonthClick}
+            onNextMonthClick={onNextMonthClick}
+            renderMonth={renderMonth}
+            renderDay={renderDay}
+            renderCalendarInfo={renderCalendarInfo}
+            isFocused={isDayPickerFocused}
+            phrases={phrases}
+            daySize={daySize}
+            isRTL={isRTL}
+            isOutsideRange={isOutsideRange}
+            isDayBlocked={isDayBlocked}
+            isDayHighlighted={isDayHighlighted}
+            firstDayOfWeek={firstDayOfWeek}
+          />
+
+          <div style={{ width: '127px', backgroundColor: '#f9f9f9', padding: '15px 0 15px 0' }}>
+            <div style={{ height: '90%', margin: '15px 0', overflow: 'scroll' }}>
+              <ul style={{ height: '100%', padding: '0 20px' }}>
+                {
+                  /* eslint-disable */
+                  TIMES.map(time => {
+                    const classNames = cx('TimeListItem', {
+                      'TimeListItem--selected': time === this.state.time,
+                      'TimeListItem--hovered': this.state.isTimeItemHovered && time === this.state.timeItemElementId,
+                    });
+                    return (
+                      <li
+                        key={time}
+                        id={time}
+                        className={classNames}
+                        onMouseEnter={this.onTimeItemMouseEnter}
+                        onMouseLeave={this.onTimeItemMouseLeave}
+                        onClick={() => this.setState({ time })}
+                      >
+                        {time}
+                      </li>
+                    );
+                  })
+                  /* eslint-enable */
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="SingleDatePickerFooter">
+          <div>
+            {
+              this.state.date &&
+              this.state.time &&
+              `${this.state.date.format('DD/MM/YYYY')}, ${this.state.time}`
+            }
+          </div>
+
+          <div>
+            <button className="SelectOKButton" onClick={this.onDateTimeSelect}>Chọn</button>
+          </div>
+        </div>
 
         {withFullScreenPortal && (
           <button
@@ -454,5 +601,7 @@ export default class SingleDatePicker extends React.Component {
   }
 }
 
-SingleDatePicker.propTypes = propTypes;
+SingleDatePicker.propTypes = Object.assign(propTypes, {
+  onDateTimeChange: PropTypes.func.isRequired,
+});
 SingleDatePicker.defaultProps = defaultProps;
