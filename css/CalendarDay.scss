@@ -49,6 +49,7 @@
 }
 
 .CalendarDay--hovered {
+  border-radius: 100px;
   background: lighten($react-dates-color-border-light, 3);
   color: inherit;
 }

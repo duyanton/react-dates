@@ -157,6 +157,7 @@ export default class SingleDatePicker extends React.Component {
       isTimeItemHovered: false,
       date: moment(),
       time: null,
+      dateTime: props.dateTime && moment(props.dateTime),
       timeItemElementId: null,
     };
 
@@ -174,6 +175,7 @@ export default class SingleDatePicker extends React.Component {
     this.onClearFocus = this.onClearFocus.bind(this);
     this.clearDate = this.clearDate.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
+    this.onTimeChange = this.onTimeChange.bind(this);
     this.onDateTimeSelect = this.onDateTimeSelect.bind(this);
     this.onTimeItemMouseEnter = this.onTimeItemMouseEnter.bind(this);
     this.onTimeItemMouseLeave = this.onTimeItemMouseLeave.bind(this);
@@ -276,7 +278,13 @@ export default class SingleDatePicker extends React.Component {
   }
 
   onDateChange(date) {
-    this.setState({ date });
+    const dateTime = moment(`${date.format('DD/MM/YYYY')} ${this.state.time}`, 'DD/MM/YYYY hh:mm A');
+    this.setState({ dateTime, date });
+  }
+
+  onTimeChange(time) {
+    const dateTime = moment(`${this.state.date.format('DD/MM/YYYY')} ${time}`, 'DD/MM/YYYY hh:mm A');
+    this.setState({ dateTime, time });
   }
 
   onTimeItemMouseEnter(e) {
@@ -294,9 +302,9 @@ export default class SingleDatePicker extends React.Component {
   }
 
   onDateTimeSelect() {
-    if (!this.state.date || !this.state.time) return;
-    const dateTime = moment(`${this.state.date.format('DD/MM/YYYY')} ${this.state.time}`, 'DD/MM/YYYY hh:mm A').valueOf();
-    this.props.onDateTimeChange(dateTime);
+    this.props.onDateTimeChange(this.state.dateTime.valueOf());
+    this.props.onFocusChange({ focused: null });
+    this.props.onClose();
   }
 
   getDateString(date) {
@@ -305,6 +313,20 @@ export default class SingleDatePicker extends React.Component {
       return date && date.format(displayFormat);
     }
     return toLocalizedDateString(date);
+  }
+
+  getDateTimeString() {
+    if (!this.state.dateTime) return '';
+    const value = this.state.dateTime;
+    let dayName = value.format('dddd');
+    dayName = dayName.substr(0, 1).toUpperCase() + dayName.substr(1);
+    const date = value.format('D');
+    const month = value.format('M');
+    const year = value.format('YYYY');
+    const hours = value.format('HH:mm');
+    const displayString = `${dayName}, ${date} tháng ${month}, ${year} vào lúc ${hours}`;
+
+    return displayString;
   }
 
   getDayPickerContainerClasses() {
@@ -396,6 +418,7 @@ export default class SingleDatePicker extends React.Component {
     const {
       onDateChange,
       date,
+      dateTime,
       onFocusChange,
       focused,
       enableOutsideDays,
@@ -495,7 +518,7 @@ export default class SingleDatePicker extends React.Component {
                         className={classNames}
                         onMouseEnter={this.onTimeItemMouseEnter}
                         onMouseLeave={this.onTimeItemMouseLeave}
-                        onClick={() => this.setState({ time })}
+                        onClick={() => this.onTimeChange(time)}
                       >
                         {time}
                       </li>
@@ -560,7 +583,8 @@ export default class SingleDatePicker extends React.Component {
 
     const { isInputFocused } = this.state;
 
-    const displayValue = this.getDateString(date);
+    // const displayValue = this.getDateString(date);
+    const displayValue = this.getDateTimeString();
     const inputValue = toISODateString(date);
 
     const onOutsideClick = (!withPortal && !withFullScreenPortal) ? this.onClearFocus : undefined;

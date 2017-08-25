@@ -36,6 +36,7 @@
     background: #fff; }
 
 .CalendarDay--hovered {
+  border-radius: 100px;
   background: #e4e7e7;
   color: inherit; }
 
@@ -443,8 +444,9 @@
   display: inline; }
 
 .DateInput {
+  width: 455px;
   font-weight: 200;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
   color: #757575;
   margin: 0;
@@ -452,7 +454,6 @@
   background: #fff;
   position: relative;
   display: inline-block;
-  width: 130px;
   vertical-align: middle; }
 
 .DateInput--with-caret::before,
@@ -493,17 +494,13 @@
 
 .DateInput__display-text {
   padding: 4px 8px;
-  white-space: nowrap;
-  overflow: hidden; }
+  white-space: nowrap; }
 
 .DateInput__display-text--has-input {
   color: #484848; }
 
 .DateInput__display-text--focused {
-  background: #99ede6;
-  border-color: #99ede6;
-  border-radius: 3px;
-  color: #007a87; }
+  border-radius: 3px; }
 
 .DateInput__display-text--disabled {
   font-style: italic; }

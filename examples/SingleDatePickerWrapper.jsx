@@ -77,14 +77,20 @@ class SingleDatePickerWrapper extends React.Component {
     this.state = {
       focused: props.autoFocus,
       date: props.initialDate,
+      dateTime: null,
     };
 
     this.onDateChange = this.onDateChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+    this.onDateTimeChange = this.onDateTimeChange.bind(this);
   }
 
   onDateChange(date) {
     this.setState({ date });
+  }
+
+  onDateTimeChange(dateTime) {
+    this.setState({ dateTime });
   }
 
   onFocusChange({ focused }) {
@@ -92,7 +98,7 @@ class SingleDatePickerWrapper extends React.Component {
   }
 
   render() {
-    const { focused, date } = this.state;
+    const { focused, date, dateTime } = this.state;
 
     // autoFocus and initialDate are helper props for the example wrapper but are not
     // props on the SingleDatePicker itself and thus, have to be omitted.
@@ -101,15 +107,18 @@ class SingleDatePickerWrapper extends React.Component {
       'initialDate',
     ]);
 
+    console.log(this.state.dateTime);
+
     return (
       <SingleDatePicker
         {...props}
         id="date_input"
         date={date}
+        dateTime={dateTime}
         focused={focused}
         onDateChange={this.onDateChange}
         onFocusChange={this.onFocusChange}
-        onDateTimeChange={(time) => console.log(time)}
+        onDateTimeChange={this.onDateTimeChange}
         keepOpenOnDateSelect
         isOutsideRange={() => {}}
         hideKeyboardShortcutsPanel
