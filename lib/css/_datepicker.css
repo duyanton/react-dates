@@ -741,6 +741,7 @@
   display: flex;
   background-color: #fff;
   border: 1px solid #ededed;
+  border-radius: 4px;
   border-top: none; }
 
 .SingleDatePickerInput--rtl {
