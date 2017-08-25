@@ -323,7 +323,7 @@ export default class SingleDatePicker extends React.Component {
     const date = value.format('D');
     const month = value.format('M');
     const year = value.format('YYYY');
-    const hours = value.format('HH:mm');
+    const hours = value.format('hh:mm A');
     const displayString = `${dayName}, ${date} tháng ${month}, ${year} vào lúc ${hours}`;
 
     return displayString;
