@@ -4,7 +4,7 @@
   color: #565a5c;
   cursor: pointer; }
 
-.CalendarDay__button, .CalendarDay button {
+.CalendarDay__button {
   position: relative;
   height: 100%;
   width: 100%;
@@ -19,7 +19,7 @@
   overflow: visible;
   cursor: pointer;
   box-sizing: border-box; }
-  .CalendarDay__button:active, .CalendarDay button:active {
+  .CalendarDay__button:active {
     outline: 0; }
 
 .CalendarDay--highlighted-calendar {
@@ -450,7 +450,7 @@
   line-height: 24px;
   color: inherit;
   margin: 0;
-  padding: 8px;
+  padding: 0 8px;
   background: #fff;
   position: relative;
   display: inline-block;
@@ -783,7 +783,7 @@
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
-  padding: 10px;
+  padding: 5px;
   margin: 0 5px 0 10px; }
   .SingleDatePickerInput__calendar-icon svg {
     fill: #82888a;
