@@ -541,7 +541,7 @@ export default class SingleDatePicker extends React.Component {
           </div>
 
           <div>
-            <button className="SelectOKButton" onClick={this.onDateTimeSelect}>Chọn</button>
+            <button className="CalendarDay__selectButton" onClick={this.onDateTimeSelect}>Chọn</button>
           </div>
         </div>
 
