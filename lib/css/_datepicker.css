@@ -468,11 +468,11 @@
   z-index: 2; }
 
 .DateInput--with-caret::before {
-  top: 62px;
+  top: 30px;
   border-bottom-color: rgba(0, 0, 0, 0.1); }
 
 .DateInput--with-caret::after {
-  top: 63px;
+  top: 31px;
   border-bottom-color: #fff; }
 
 .DateInput--disabled {
@@ -523,7 +523,7 @@
   z-index: 1;
   background-color: #fff;
   position: absolute;
-  top: 72px; }
+  top: 40px; }
 
 .DateRangePicker__picker--rtl {
   direction: rtl; }
@@ -641,7 +641,7 @@
   z-index: 1;
   background-color: #fff;
   position: absolute;
-  top: 72px; }
+  top: 40px; }
 
 .SingleDatePicker__picker--rtl {
   direction: rtl; }
@@ -741,7 +741,7 @@
   display: flex;
   background-color: #fff;
   border: 1px solid #ededed;
-  border-radius: 4px;
+  border-radius: 0 0 4px 4px;
   border-top: none; }
 
 .SingleDatePickerInput--rtl {
