@@ -4,7 +4,7 @@
   color: #565a5c;
   cursor: pointer; }
 
-.CalendarDay__button {
+.CalendarDay__button, .CalendarDay button {
   position: relative;
   height: 100%;
   width: 100%;
@@ -19,7 +19,7 @@
   overflow: visible;
   cursor: pointer;
   box-sizing: border-box; }
-  .CalendarDay__button:active {
+  .CalendarDay__button:active, .CalendarDay button:active {
     outline: 0; }
 
 .CalendarDay--highlighted-calendar {
@@ -209,7 +209,7 @@
   .DayPicker--vertical-scrollable .DayPicker__week-header {
     top: 0;
     display: table-row;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid #ededed;
     background: white; }
   .DayPicker--vertical-scrollable .transition-container--vertical {
     padding-top: 20px;
@@ -377,7 +377,7 @@
 .DayPickerKeyboardShortcuts__panel {
   overflow: auto;
   background: #fff;
-  border: 1px solid #dbdbdb;
+  border: 1px solid #ededed;
   border-radius: 2px;
   position: absolute;
   top: 0;
@@ -446,9 +446,9 @@
 .DateInput {
   width: 455px;
   font-weight: 200;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
-  color: #757575;
+  color: inherit;
   margin: 0;
   padding: 8px;
   background: #fff;
@@ -612,7 +612,7 @@
 
 .DateRangePickerInput__clear-dates:focus,
 .DateRangePickerInput__clear-dates--hover {
-  background: #dbdbdb;
+  background: #ededed;
   border-radius: 50%; }
 
 .DateRangePickerInput__calendar-icon {
@@ -722,7 +722,7 @@
   text-align: center;
   color: #323232; }
 
-.SelectOKButton {
+.CalendarDay__selectButton {
   border: none;
   box-shadow: none;
   outline: none;
@@ -738,8 +738,10 @@
   color: #ffffff; }
 
 .SingleDatePickerInput {
+  display: flex;
   background-color: #fff;
-  border: 1px solid #dbdbdb; }
+  border: 1px solid #ededed;
+  border-top: none; }
 
 .SingleDatePickerInput--rtl {
   direction: rtl; }
@@ -768,7 +770,7 @@
 
 .SingleDatePickerInput__clear-date:focus,
 .SingleDatePickerInput__clear-date--hover {
-  background: #dbdbdb;
+  background: #ededed;
   border-radius: 50%; }
 
 .SingleDatePickerInput__calendar-icon {
