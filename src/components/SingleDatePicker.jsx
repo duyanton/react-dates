@@ -279,13 +279,13 @@ export default class SingleDatePicker extends React.Component {
 
   onDateChange(date) {
     const dateTime = moment(`${date.format('DD/MM/YYYY')} ${this.state.time}`, 'DD/MM/YYYY hh:mm A');
-    this.props.onDateTimeChange(dateTime.valueOf());
+    this.props.onDateTimeChange(dateTime.unix());
     this.setState({ dateTime, date });
   }
 
   onTimeChange(time) {
     const dateTime = moment(`${this.state.date.format('DD/MM/YYYY')} ${time}`, 'DD/MM/YYYY hh:mm A');
-    this.props.onDateTimeChange(dateTime.valueOf());
+    this.props.onDateTimeChange(dateTime.unix());
     this.setState({ dateTime, time });
   }
 
@@ -304,7 +304,7 @@ export default class SingleDatePicker extends React.Component {
   }
 
   onDateTimeSelect() {
-    this.props.onDateTimeChange(this.state.dateTime.valueOf());
+    this.props.onDateTimeChange(this.state.dateTime.unix());
     this.props.onFocusChange({ focused: null });
     this.props.onClose();
   }
