@@ -157,12 +157,12 @@ export default class SingleDatePicker extends React.Component {
       isTimeItemHovered: false,
       date: moment(),
       time: null,
-      dateTime: props.dateTime && moment(props.dateTime),
+      dateTime: props.dateTime && moment(props.dateTime * 1000),
       timeItemElementId: null,
     };
 
     if (props.dateTime) {
-      const time = moment(props.dateTime);
+      const time = moment(props.dateTime * 1000);
       this.state.date = time;
       this.state.time = time.format('hh:mm A');
     }
