@@ -503,7 +503,7 @@ export default class SingleDatePicker extends React.Component {
             firstDayOfWeek={firstDayOfWeek}
           />
 
-          <div style={{ width: '127px', backgroundColor: '#f9f9f9', padding: '15px 0 15px 0' }}>
+          <div style={{ width: '25%', backgroundColor: '#f9f9f9', padding: '15px 0 15px 0' }}>
             <div style={{ height: '90%', margin: '15px 0', overflow: 'scroll' }}>
               <ul style={{ margin: '0', height: '100%', padding: '0 20px' }}>
                 {
