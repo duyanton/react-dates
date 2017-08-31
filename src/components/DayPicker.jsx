@@ -743,6 +743,7 @@ export default class DayPicker extends React.Component {
       daySize,
       isFocused,
       phrases,
+      isMobile,
     } = this.props;
 
     const numOfWeekHeaders = this.isVertical() ? 1 : numberOfMonths;
@@ -762,6 +763,7 @@ export default class DayPicker extends React.Component {
     if (verticalScrollable) firstVisibleMonthIndex = 0;
 
     const dayPickerClassNames = cx('DayPicker', {
+      'DayPicker--mobile': isMobile,
       'DayPicker--horizontal': this.isHorizontal(),
       'DayPicker--vertical': this.isVertical(),
       'DayPicker--vertical-scrollable': verticalScrollable,

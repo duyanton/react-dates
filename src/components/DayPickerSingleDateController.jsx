@@ -74,6 +74,8 @@ const propTypes = forbidExtraProps({
   phrases: PropTypes.shape(getPhrasePropTypes(DayPickerPhrases)),
 
   isRTL: PropTypes.bool,
+
+  isMobile: PropTypes.bool,
 });
 
 const defaultProps = {
@@ -121,6 +123,8 @@ const defaultProps = {
   phrases: DayPickerPhrases,
 
   isRTL: false,
+
+  isMobile: false,
 };
 
 export default class DayPickerSingleDateController extends React.Component {
@@ -570,12 +574,14 @@ export default class DayPickerSingleDateController extends React.Component {
       onBlur,
       minimumNights,
       showKeyboardShortcuts,
+      isMobile,
     } = this.props;
 
     const { currentMonth, visibleDays } = this.state;
 
     const dayPickerComponent = (
       <DayPicker
+        isMobile={isMobile}
         orientation={orientation}
         enableOutsideDays={enableOutsideDays}
         modifiers={visibleDays}

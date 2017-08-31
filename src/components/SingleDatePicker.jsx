@@ -142,6 +142,9 @@ const defaultProps = {
   displayFormat: () => moment.localeData().longDateFormat('L'),
   monthFormat: 'MMMM YYYY',
   phrases: SingleDatePickerPhrases,
+
+  // mobile props
+  isMobile: false,
 };
 
 export default class SingleDatePicker extends React.Component {
@@ -447,22 +450,125 @@ export default class SingleDatePicker extends React.Component {
       isOutsideRange,
       isDayBlocked,
       isDayHighlighted,
+      isMobile,
     } = this.props;
     const { dayPickerContainerStyles, isDayPickerFocused } = this.state;
 
     const onOutsideClick = (!withFullScreenPortal && withPortal) ? this.onClearFocus : undefined;
     const closeIcon = customCloseIcon || (<CloseButton />);
 
+    if (isMobile) {
+      return (
+        <div // eslint-disable-line jsx-a11y/no-static-element-interactions
+          ref={(ref) => { this.dayPickerContainer = ref; }}
+          className={this.getDayPickerContainerClasses()}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            borderRadius: '3px',
+            boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.3)',
+          }}
+          onClick={onOutsideClick}
+        >
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '295px',
+            maxHeight: '100%',
+            borderBottom: 'solid 1px #e9e9e9',
+          }}
+          >
+            <DayPickerSingleDateController
+              isMobile={isMobile}
+              date={this.state.date}
+              onDateChange={this.onDateChange}
+              onFocusChange={onFocusChange}
+              orientation={orientation}
+              enableOutsideDays={enableOutsideDays}
+              numberOfMonths={numberOfMonths}
+              monthFormat={monthFormat}
+              withPortal={withPortal || withFullScreenPortal}
+              focused={focused}
+              keepOpenOnDateSelect={keepOpenOnDateSelect}
+              hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
+              initialVisibleMonth={initialVisibleMonth}
+              navPrev={navPrev}
+              navNext={navNext}
+              onPrevMonthClick={onPrevMonthClick}
+              onNextMonthClick={onNextMonthClick}
+              renderMonth={renderMonth}
+              renderDay={renderDay}
+              renderCalendarInfo={renderCalendarInfo}
+              isFocused={isDayPickerFocused}
+              phrases={phrases}
+              daySize={daySize}
+              isRTL={isRTL}
+              isOutsideRange={isOutsideRange}
+              isDayBlocked={isDayBlocked}
+              isDayHighlighted={isDayHighlighted}
+              firstDayOfWeek={firstDayOfWeek}
+            />
+
+            <div style={{ width: '100%', backgroundColor: '#f9f9f9', padding: '0' }}>
+              <div style={{ height: '100px', margin: '15px 0', overflow: 'scroll' }}>
+                <ul style={{ margin: '0', height: '100%', padding: '0 20px' }}>
+                  {
+                    /* eslint-disable */
+                    TIMES.map(time => {
+                      const classNames = cx('TimeListItem', {
+                        'TimeListItem--selected': time === this.state.time,
+                        'TimeListItem--hovered': this.state.isTimeItemHovered && time === this.state.timeItemElementId,
+                      });
+                      return (
+                        <li
+                          key={time}
+                          id={time}
+                          className={classNames}
+                          onMouseEnter={this.onTimeItemMouseEnter}
+                          onMouseLeave={this.onTimeItemMouseLeave}
+                          onClick={() => this.onTimeChange(time)}
+                        >
+                          {time}
+                        </li>
+                      );
+                    })
+                    /* eslint-enable */
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="SingleDatePickerFooter">
+            <div>
+              {
+                this.state.date &&
+                this.state.time &&
+                `${this.state.date.format('DD/MM/YYYY')}, ${this.state.time}`
+              }
+            </div>
+
+            <div>
+              <button
+                className="CalendarDay__selectButton"
+                onClick={this.onDateTimeSelect}
+              >Chọn
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div // eslint-disable-line jsx-a11y/no-static-element-interactions
         ref={(ref) => { this.dayPickerContainer = ref; }}
         className={this.getDayPickerContainerClasses()}
-        style={Object.assign(dayPickerContainerStyles, {
+        style={{
           display: 'flex',
           flexDirection: 'column',
           borderRadius: '3px',
           boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.3)',
-        })}
+        }}
         onClick={onOutsideClick}
       >
         <div style={{
@@ -543,7 +649,11 @@ export default class SingleDatePicker extends React.Component {
           </div>
 
           <div>
-            <button className="CalendarDay__selectButton" onClick={this.onDateTimeSelect}>Chọn</button>
+            <button
+              className="CalendarDay__selectButton"
+              onClick={this.onDateTimeSelect}
+            >Chọn
+            </button>
           </div>
         </div>
 
