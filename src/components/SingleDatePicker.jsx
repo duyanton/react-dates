@@ -467,6 +467,7 @@ export default class SingleDatePicker extends React.Component {
             flexDirection: 'column',
             borderRadius: '3px',
             boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.3)',
+            left: 10,
           }}
           onClick={onOutsideClick}
         >
@@ -511,7 +512,7 @@ export default class SingleDatePicker extends React.Component {
 
             <div style={{ width: '100%', backgroundColor: '#f9f9f9', padding: '0' }}>
               <div style={{ height: '100px', margin: '15px 0', overflow: 'scroll' }}>
-                <ul style={{ margin: '0', height: '100%', padding: '0 20px' }}>
+                <ul style={{ margin: '0', height: '100%', padding: '0 15px' }}>
                   {
                     /* eslint-disable */
                     TIMES.map(time => {
@@ -568,6 +569,7 @@ export default class SingleDatePicker extends React.Component {
           flexDirection: 'column',
           borderRadius: '3px',
           boxShadow: '0 2px 10px 0 rgba(0, 0, 0, 0.3)',
+          left: 10,
         }}
         onClick={onOutsideClick}
       >
@@ -611,7 +613,7 @@ export default class SingleDatePicker extends React.Component {
 
           <div style={{ width: '25%', backgroundColor: '#f9f9f9', padding: '15px 0 15px 0' }}>
             <div style={{ height: '90%', margin: '15px 0', overflow: 'scroll' }}>
-              <ul style={{ margin: '0', height: '100%', padding: '0 20px' }}>
+              <ul style={{ margin: '0', height: '100%', padding: '0 15px' }}>
                 {
                   /* eslint-disable */
                   TIMES.map(time => {
