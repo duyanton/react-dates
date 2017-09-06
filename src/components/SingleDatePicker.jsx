@@ -511,7 +511,7 @@ export default class SingleDatePicker extends React.Component {
             />
 
             <div style={{ width: '100%', backgroundColor: '#f9f9f9', padding: '0', zIndex: 2 }}>
-              <div style={{ height: '100px', margin: '15px 0', overflowY: 'scroll', overflowX: 'hidden' }}>
+              <div style={{ height: '60px', margin: '15px 0', overflowY: 'scroll', overflowX: 'hidden' }}>
                 <ul style={{ margin: '0', height: '100%', padding: '0 15px' }}>
                   {
                     /* eslint-disable */
