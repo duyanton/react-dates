@@ -511,7 +511,7 @@ export default class SingleDatePicker extends React.Component {
             />
 
             <div style={{ width: '100%', backgroundColor: '#f9f9f9', padding: '0', zIndex: 2 }}>
-              <div style={{ height: '100px', margin: '15px 0', overflow: 'scroll' }}>
+              <div style={{ height: '100px', margin: '15px 0', overflowY: 'scroll', overflowX: 'hidden' }}>
                 <ul style={{ margin: '0', height: '100%', padding: '0 15px' }}>
                   {
                     /* eslint-disable */
@@ -611,8 +611,8 @@ export default class SingleDatePicker extends React.Component {
             firstDayOfWeek={firstDayOfWeek}
           />
 
-          <div style={{ width: '25%', backgroundColor: '#f9f9f9', padding: '15px 0 15px 0', zIndex: 2 }}>
-            <div style={{ height: '90%', margin: '15px 0', overflow: 'scroll' }}>
+          <div style={{ minWidth: '25%', backgroundColor: '#f9f9f9', padding: '15px 0 15px 0', zIndex: 2 }}>
+            <div style={{ height: '90%', margin: '15px 0', overflowY: 'scroll', overflowX: 'hidden' }}>
               <ul style={{ margin: '0', height: '100%', padding: '0 15px' }}>
                 {
                   /* eslint-disable */
